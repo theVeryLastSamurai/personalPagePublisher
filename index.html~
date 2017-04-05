@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IASBS Personal Page Publisher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/custom-font.css">
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
+</head>
+
+<body class="flat-blue landing-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top  navbar-affix" role="navigation" data-spy="affix" data-offset-top="60">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <div class="icon icon-iasbs"></div>
+                    <div class="title">IASBS Personal Page Publisher</div>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse " aria-expanded="true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="login.html">Login</a></li>
+                    <li><a class="scrolly" href="#about">About</a></li>
+                    <li><a class="scrolly" href="admin/">Are You an Admin ?</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="jumbotron app-header">
+        <div class="container">
+            <h2 class="text-center"><i class="app-logo fa icon-iasbs fa-5x color-white"></i><div class="color-white">IASBS Personal Page Publisher</div></h2>
+            <p class="text-center color-white app-description">Need an Academic Personal Page fast ?</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg app-btn" href="login.html" role="button">Login</a></p>
+        </div>
+    </div>
+    <div class="container-fluid app-content-a">
+        <div class="container">        <div class="row text-center">
+            <div class="col-md-4 col-sm-6">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa fa-phone fa-stack-1x"></i>
+                </span>
+                <h2>Contact Us</h2>
+                <p>You can easily contact us regarding any matter of critism or questions at <a href="mailto:h.mirsadeghi@iasbs.ac.ir">h.mirsadeghi@iasbs.ac.ir</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-md-4 col-sm-6">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa icon-iasbs fa-stack-1x" style="margin-top:35px;"></i>
+                </span>
+                <h2>IASBS</h2>
+                <p>IASBS stands for <strong>I</strong>nstitute for <strong>A</strong>dvanced <strong>S</strong>tudies in <strong>B</strong>asic <strong>S</strong>ciences<br/>
+                and is an advanced research center and graduate-level degree-granting institution in Zanjan, Iran. It was founded in 1991 by <a href='http://iasbs.ac.ir/~sobouti/' target="_blank">Prof. Yousef Sobouti</a>, who was the director of the institute until 2010
+                </p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-md-4 col-sm-6">
+                <span class="fa-stack fa-lg fa-5x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa fa-users fa-stack-1x"></i>
+                </span>
+                <h2>Credits</h2>
+                <p>Proposed by F.Hajizadeh at <a href="mailto:hajizade@iasbs.ac.ir">hajizade@iasbs.ac.ir</a><br/>
+                Managed & Maintained by Prof. <a target="_blank" href="http://iasbs.ac.ir/~eansari">Ebrahim Ansari</a> at eansari@iasbs.ac.ir</p>
+                Conducted by <a href="http://iasbs.ac.ir/~h.mirsadeghi" target="_blank">Hadi Mirsadeghi</a> at h.mirsadeghi@iasbs.ac.ir</p>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        </div>
+    </div>
+    <div id="about" class="container-fluid app-content-b feature-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-6">
+                </div>
+                <div class="col-md-5 col-sm-6 text-right color-white">
+                    <h2 class="featurette-heading">About the Personal Page Publisher</h2>
+                    <p class="lead">As of July of 2016, Faculty members of IASBS can easily Conduct a Personal Page through this easy-to-access straight-forward portal<br/>If a faculty member, You can Log in using your IASBS Username & Password <strong>Now</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $.post( "webservices/isloggedin.php" ,function(data){
+            if(data=='RIGHT'){
+                window.location.replace("portal/index.php");
+            }
+        });
+    </script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/Chart.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap-switch.min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="lib/js/ace/ace.js"></script>
+    <script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
+    <script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.scrolly.min.js"></script>
+    <script type="text/javascript">
+        $('.scrolly').scrolly({
+            speed: 1000,
+            offset: 0
+        });
+    </script>
+    <!-- /.container -->
+</body>
+
+</html>

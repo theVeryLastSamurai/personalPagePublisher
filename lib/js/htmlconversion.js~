@@ -1,0 +1,18 @@
+function HTMLCode(str){
+	if(str==undefined)
+		return;
+	var output=str;
+	output=output.replace(/'/g, '&SINGLEQUOTE');
+	output=output.replace(/"/g, '&DOUBLEQUOTE');
+	output=output.replace(/\n/g, '&NEWLINE');
+	return output;
+}
+function HTMLDecode(str){
+	if(str==undefined)
+		return;
+	var output=str;
+	output=output.replace(/&SINGLEQUOTE/g, '\'');
+	output=output.replace(/&DOUBLEQUOTE/g, '\"');
+	output=output.replace(/&NEWLINE/g, '\n');
+	return output;
+}

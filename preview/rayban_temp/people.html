@@ -1,0 +1,133 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css" >
+		<link rel="stylesheet" type="text/css" href="css/style.css" >
+
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/totop.js" ></script>
+
+		
+		
+	</head>
+	<body>
+		
+		
+<header>
+	<div class="row">
+		<div class="col-lg-12">
+			<img style="width:100%;" src="rayban_images/header_rayban.jpg" />
+			<h1 class="carousel-caption" ></h1>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="SearchBox hidden-lg hidden-md hidden-sm" style="float:left;width: 80%;" >
+					<input type="text" placeholder="Search" style="width:80%;" />
+					<button><i class="fa fa-search"></i></button>
+				</div>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				</button>
+		    </div>
+		    <div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li  ><a href='index.html'>Home Page</a></li> <li  class='active'  ><a href='#'>People</a></li> <li  ><a href='research.html'>Research</a></li> <li  ><a href='publications.html'>Publications</a></li> <li  ><a href='teachings.html'>Teachings</a></li> <li  ><a href='contactme.html'>Contact Me</a></li> 					<li class='dropdown '>
+										<a class='dropdown-toggle' data-toggle='dropdown' href='#'>Events
+										<span class='caret'></span></a>
+										<ul class='dropdown-menu'><li  ><a href='groupmeetings.html'>Group Meetings</a></li><li  ><a href='participatedactivities.html'>Participated Activities</a></li><li  ><a href='beyondscience.html'>Beyond Science</a></li></ul></li>					<!--<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Events
+						<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Page 1-1</a></li>
+							<li><a href="#">Page 1-2</a></li>
+							<li><a href="#">Page 1-3</a></li> 
+						</ul>
+					</li>-->
+				</ul>
+				<div class="nav navbar-nav navbar-right" >
+					<div class="SearchBox hidden-xs">
+						<input type="text" placeholder="Search" />
+						<button><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<script type="text/javascript">
+	
+	$(".SearchBox input[type=text]").on("keyup",function(){ // to Synchronize Both Search Boxes
+		$(".SearchBox input[type=text]").val($(this).val());
+	});
+
+	$(".SearchBox button").click(function(){//submit Search
+		alert("Searching for "+$(this).siblings("input[type=text]").val());
+	});
+
+</script>
+		<div class="container">
+			<div class="row">
+				<div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="card-header">
+						<h1><i class="Bar"></i>Group Leader</h1>
+					</div>
+					<div class="card-body">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<img class="HomepageHeaderImage img-responsive" src="rayban_images/profilepic_default.jpg" />
+						</div>
+						<div class="col-lg-8 col">
+													</div>
+					</div>
+				</div>
+				
+							<div class='card col-xs-12 col-sm-12 col-md-12 col-lg-12' >
+								<div class='card-header'>
+									<h2><i class='Bar'></i>Post-Docs</h2>
+								</div>
+								<div class='card-body'></div>
+							</div>
+						
+							<div class='card col-xs-12 col-sm-12 col-md-12 col-lg-12' >
+								<div class='card-header'>
+									<h2><i class='Bar'></i>PhD Students</h2>
+								</div>
+								<div class='card-body'></div>
+							</div>
+						
+							<div class='card col-xs-12 col-sm-12 col-md-12 col-lg-12' >
+								<div class='card-header'>
+									<h2><i class='Bar'></i>MSc Students</h2>
+								</div>
+								<div class='card-body'></div>
+							</div>
+									</div>
+		</div>
+		
+		
+<footer>
+	<div class="container">
+		<ul class="FooterSections row">
+			<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+				<span class="fa fa-user"></span>
+								<ul class="FooterItem">
+					<li>
+						<span class="fa fa-angle-right"></span>
+											</li>
+					<li>
+						<span class="fa fa-angle-right"></span>
+											</li>
+				</ul>
+			</li>
+			
+								</ul>
+	</div>
+</footer>		<a href="#" class="scrollup fa fa-2x fa-arrow-up"></a>
+	</body>
+</html>

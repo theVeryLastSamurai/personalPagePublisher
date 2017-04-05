@@ -1,0 +1,100 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IASBS Personal Page Publisher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/flat-blue.css">
+</head>
+
+<body class="flat-blue landing-page">
+
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+<?php
+
+// Load the public key from the public.pem file
+$publicKey = file_get_contents('public.pem');
+// Extract public key
+$res= openssl_get_publickey($publicKey);
+
+// Read the previously encrypted string and the key used to encrypt it
+ $encryptedData = base64_decode($_POST["user"]);
+
+// Decrypt the data with our $publickey and store the result in $decryptedData
+$result = openssl_public_decrypt($encryptedData, $decryptedData, $res);
+
+// Show if it was a success or failure
+if ($result) {
+
+	echo "
+		<script type='text/javascript'>
+			$.ajax({//check if this user exists
+				url:'../admin/adminwebservices/isusernameavailable.php',
+				data: {'username':'$decryptedData'},
+				success: function(d){
+					if(d.toLowerCase()=='right'){//first login , create user
+						$.ajax({
+							url: '../admin/adminwebservices/ldapusersignup.php',
+							data: {
+								'username':'$decryptedData',
+								'password':'$decryptedData',
+								'email':'$decryptedData@iasbs.ac.ir'
+							},
+							success: function(d){
+								$.ajax({
+									url: '../webservices/login.php',
+									data: {
+										'username': '$decryptedData',
+										'password':'$decryptedData'
+									},
+									success:function(d){
+										if(d.toLowerCase()=='right'){
+											window.location.href = '../index.html';
+										}
+									}
+								});
+
+							},
+							failure: function(){//couldn't sign up new user
+							}
+						});
+					}else{//user already exists, LOG USER IN
+						$.ajax({
+							url: '../webservices/login.php',
+							data: {'username': '$decryptedData','password':'$decryptedData'},
+							success:function(d){
+								if(d.toLowerCase()=='right'){
+									window.location.href = '../index.html';
+								}
+							}
+						});
+					}
+				},
+				failure: function(){//couldn't check if username was available
+						alert('Error#1: Something went wrong - try again');
+						window.location.href = 'https://systems.iasbs.ac.ir/';
+				}
+			});
+		</script>
+	";
+	
+	//log the user in
+	//redirect to ppp index
+
+
+}else{
+	echo "<script type='text/javascript'>
+		window.location.href = 'https://systems.iasbs.ac.ir/';
+	</script>";
+}
+
+
+?>
+</body>
+</html>

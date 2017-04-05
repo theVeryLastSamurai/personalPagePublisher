@@ -1,0 +1,194 @@
+<?php
+	/* "everypage_technical_header.php" Must be already Included */
+
+	$title= (isset($title))? $title : "";
+	$act_deact= (isset($act_deact))? $act_deact : true;
+	/*Values Recieved from the page that Required this page*/
+
+	$query="SELECT * FROM page WHERE websiteno='".$websiteno."' AND page_id='".$page_id."' ;";
+    $result = $conn->query($query);
+    if( $result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        $activity_status= $row['activity_status'];
+    }else{
+        $activity_status= false;
+    }
+
+	echo"
+		<style>
+			.ActivationDeactivationButton[data-value=active] > button.Deactivation {
+            	display: none;
+	        }
+	        
+	        .ActivationDeactivationButton[data-value=deactive] > button.Activation{
+	            display: none;
+	        }
+	        
+		</style>
+		<nav class='navbar navbar-default navbar-fixed-top navbar-top'>
+	        <div class='container-fluid'>
+	            <div class='navbar-header'>
+	                <button type='button' class='navbar-expand-toggle'>
+	                    <i class='fa fa-bars icon'></i>
+	                </button>
+	                <ol class='breadcrumb navbar-breadcrumb'>
+	                    <li class='active'>".$title."</li>
+	                    ".( ($act_deact)? 
+		                    "<li>
+	                            <span class='ActivationDeactivationButton' data-value='".( $activity_status? "active" : "deactive" )."'>
+	                                <button class='Activation btn btn-danger' data-toggle='modal' data-target='#ModalDeactivate' >Deactivate</button>
+	                                <button class='Deactivation btn btn-success' data-toggle='modal' data-target='#ModalActivate' >Activate</button>
+	                            </span>
+	                        </li>"
+						: "" )."
+	                </ol>
+	                <button type='button' class='navbar-right-expand-toggle pull-right visible-xs'>
+	                    <i class='fa fa-th icon'></i>
+	                </button>
+	            </div>
+	            <ul class='nav navbar-nav navbar-right'>
+	                <button type='button' class='navbar-right-expand-toggle pull-right visible-xs'>
+	                    <i class='fa fa-times icon'></i>
+	                </button>
+	                <li class='dropdown profile'>
+	                    <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>".$_SESSION['LoggedIn']."<span class='caret'></span></a>
+	                    <ul class='dropdown-menu animated fadeInDown'>
+	                        <li class='profile-img'>
+	                            <img src=".$profile_pic_add." class='profile-img'>
+	                        </li>
+	                        <li>
+	                            <div class='profile-info'>
+	                                <h4 class='username'>".$_SESSION['LoggedIn']."</h4>
+	                                <p>".$_SESSION['LoggedIn']."@iasbs.ac.ir</p>
+	                                <div class='btn-group margin-bottom-2x' role='group'>
+	                                    <button type='button' class='btn btn-default' data-toggle='modal' data-target='#modallogout' ><i class='fa fa-sign-out'></i> Logout</button>
+	                                </div>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </li>
+	            </ul>
+	        </div>
+	        <div id='SuccessAlert' class='alert alert-success' role='alert' style='margin-bottom:0;display:none;'>
+	            <button type='button' class='close' aria-label='Close' onclick='CloseAlert(this);'><span aria-hidden='true'>&times;</span></button>
+	            <span class='content'></span>
+	        </div>
+	        <div id='FailureAlert' class='alert alert-danger' role='alert' style='margin-bottom:0;display:none;'>
+	            <button type='button' class='close' aria-label='Close' onclick='CloseAlert(this);'><span aria-hidden='true'>&times;</span></button>
+	            <span class='content'></span>
+	        </div>
+	    </nav>
+
+	    <!-- Log Out Modal -->
+        <div class='modal fade modal-danger' id='modallogout' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                        <h4 class='modal-title' id='myModalLabel'>Logout</h4>
+                    </div>
+                    <div class='modal-body'>
+                        Are You Sure You Want to Log Out ?
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+                        <a href='#' onclick='LogOut();' type='button' class='btn btn-danger' >Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activate Modal -->
+        <div class='modal fade modal-success' id='ModalActivate' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                        <h4 class='modal-title' id='myModalLabel'>Logout</h4>
+                    </div>
+                    <div class='modal-body'>
+                        Are You Sure You Want to Activate this Page ?
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+                        <a href='#' onclick='Activate();' type='button' class='btn btn-success' data-dismiss='modal' >Activate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deactivate Modal -->
+        <div class='modal fade modal-danger' id='ModalDeactivate' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                        <h4 class='modal-title' id='myModalLabel'>Logout</h4>
+                    </div>
+                    <div class='modal-body'>
+                        Are You Sure You Want to Deactivate this Page ?
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+                        <a href='#' onclick='Deactivate();' type='button' class='btn btn-danger' data-dismiss='modal' >Deactivate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type='text/javascript'>
+
+        	function Success(str){
+        		$('.alert').hide();
+        		$('#SuccessAlert .content').html('<strong>SUCCESS !</strong> '+str);
+                $('#SuccessAlert').show();
+        	}
+
+        	function Failure(str){
+        		$('.alert').hide();
+        		$('#FailureAlert .content').html('<strong>FAILURE !</strong> '+str);
+                $('#FailureAlert').show();
+        	}
+
+        	function CloseAlert(button){
+        		$(button).closest('.alert').hide();
+        	}
+        	
+        	function LogOut(){
+                $.post( '../webservices/logout.php' ,function(data){
+                    if(data=='RIGHT'){
+                        //window.location.replace('../index.html');
+                        window.location.replace('https://systems.iasbs.ac.ir/');/*speceficly taylored for IASBS*/
+                    }
+                    else{
+                        alert('Logout Did not happen');
+                    }
+                });
+            }
+
+        	function Deactivate(){
+        		$.post( '../webservices/deactivate.php?page_id=".$page_id."' ,function(data){
+                    if(data=='RIGHT'){
+                        $('.ActivationDeactivationButton').attr('data-value','deactive');
+                        Success('Page Deactivated Successfully')
+                    }
+                    else{
+                        Failure('Page NOT Deactivated');
+                    }
+                });
+        	}
+
+        	function Activate(){
+        		$.post( '../webservices/activate.php?page_id=".$page_id."' ,function(data){
+                    if(data=='RIGHT'){
+                        $('.ActivationDeactivationButton').attr('data-value','active');
+                        Success('Page Activated Successfully')
+                    }
+                    else{
+                        Failure('Page NOT Activated');
+                    }
+                });
+        	}
+        </script>
+	";
+?>

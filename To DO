@@ -1,0 +1,10 @@
+*test the emailing webservice in adminwebservices/emailuser.php on SERVER
+*when someone logs in through ldap, the username should be looked up in database, 'user' table, now if it's NOT already in there, then you need to run the script for creating a user, except in the 'ldap' column, 1 must be inserted
+
+
+[ Appearances ]
+
+*Make the output prettier
+*get the SearchBox Working ,using 'Google Custom Search Engine'
+*All the Input across the website Must be checked with SQL Injection preemption functions as well as the HTML thingie(done already)
+*the Default Input ,first in database, when an account is created (through ldap or by an admin), should be either an example website(like Dr.Valizadeh's), or content instructing what each section is

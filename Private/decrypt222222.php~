@@ -1,0 +1,66 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IASBS Personal Page Publisher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/flat-blue.css">
+</head>
+
+<body class="flat-blue landing-page">
+
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
+<?php
+
+// Load the public key from the public.pem file
+$publicKey = file_get_contents('public.pem');
+
+// Extract public key
+$res= openssl_get_publickey($publicKey);
+
+// Read the previously encrypted string and the key used to encrypt it
+$encryptedData = base64_decode($_POST["user"]);
+
+// Decrypt the data with our $publickey and store the result in $decryptedData
+$result = openssl_public_decrypt($encryptedData, $decryptedData, $res , OPENSSL_NO_PADDING);
+
+ 
+// Show if it was a success or failure
+
+
+if ($result) 
+{
+
+	//echo "You should give access to this user: ". $decryptedData ;
+	echo "
+		<script type='text/javascript'>
+			$.ajax('../admin/adminwebservices/isusernameavailable.php');
+		</script>
+	";
+	//check if this user exists
+	//if not create one
+	//log the user in
+	//redirect to ppp index
+} 
+else 
+{
+
+	echo "You should show failure and redirect to iasbs login page.\n";
+/*	echo "<script type='text/javascript'>
+		window.location.href = 'https://systems.iasbs.ac.ir/';
+		</script>";*/
+}
+
+// Store it locally
+
+?>
+
+</body>
+
+</html>

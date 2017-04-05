@@ -1,0 +1,159 @@
+<?php
+	
+	$info=array();
+	$query="SELECT `text_id`,`content` FROM `text` WHERE websiteno = ".$websiteno." AND page_id ='homepage' ;";
+	$result=$conn->query($query);
+	for($i=0; $i< $result->num_rows ;$i++){
+		$row=$result->fetch_assoc();
+		$info[$row['text_id']]=$row['content'];
+	}
+
+	$social=array();
+	$flag=false;
+	$query="SELECT * FROM `social_link` WHERE websiteno = ".$websiteno." ;";
+	$result=$conn->query($query);
+	for($i=0; $i<$result->num_rows ; $i++){
+		$row=$result->fetch_assoc();
+		$social[$row['type']]=array(
+			'activity_status' => $row['activity_status'],
+			'link_address' => $row['link_address'],
+		);
+		$flag=$flag || $row['activity_status'];
+	}
+
+
+	$FooterLink=array();
+	$query="SELECT * FROM `footer_link` WHERE websiteno = ".$websiteno." ;";
+	$result=$conn->query($query);
+	for($i=0; $i< $result->num_rows ; $i++){
+		$row=$result->fetch_assoc();
+		$FooterLink[$row['role']]=array(
+			'font_icon' => $row['font_icon'],
+			'title' => $row['title'],
+			'description' => $row['description'],
+			'activity_status' => $row['activity_status'],
+			'link_label' => $row['link_label'],
+			'link_address' => $row['link_address'],
+		);
+	}
+
+
+
+?>
+
+<footer>
+	<div class="container">
+		<ul class="FooterSections row">
+			<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+				<span class="fa fa-user"></span>
+				<?php echo HTMLDecode($info['fullname']); ?>
+				<ul class="FooterItem">
+					<li>
+						<span class="fa fa-angle-right"></span>
+						<?php echo HTMLDecode($info['academic_specs']); ?>
+					</li>
+					<li>
+						<span class="fa fa-angle-right"></span>
+						<?php echo HTMLDecode($info['department']); ?>
+					</li>
+				</ul>
+			</li>
+			<?php if($flag){ ?>
+				<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+					<span class="fa fa-share-alt"></span>
+					Social Contacts
+					<ul class="FooterItem row">
+						<?php if($social['researchgate']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['researchgate']['link_address']); ?>">
+									<span class='fa icon-ResearchGate'></span>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($social['facebook']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['facebook']['link_address']); ?>">
+									<span class='fa fa-facebook'></span>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($social['twitter']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['twitter']['link_address']); ?>">
+									<span class='fa fa-twitter'></span>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($social['googleplus']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['googleplus']['link_address']); ?>">
+									<span class='fa fa-google-plus'></span>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($social['instagram']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['instagram']['link_address']); ?>">
+									<span class='fa fa-instagram'></span>
+								</a>
+							</li>
+						<?php } ?>
+						<?php if($social['linkedin']['activity_status']){ ?>
+							<li class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+								<a target="_blank" class='social' href="<?php echo HTMLDecode($social['linkedin']['link_address']); ?>">
+									<span class='fa fa-linkedin'></span>
+								</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</li>
+			<?php } ?>
+
+			<?php if($FooterLink[0]['activity_status']){ ?>
+				<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+					<a class="link" target="_blank" href="<?php echo $FooterLink[0]['link_address']; ?>" >
+						<span id='FontIcon0' ></span>
+						<?php echo HTMLDecode($FooterLink[0]['title']); ?>
+					</a>
+					<ul class="FooterItem">
+						<li>
+							<?php echo HTMLDecode($FooterLink[0]['description']); ?>
+						</li>
+						<li>
+							<span class="fa fa-angle-right"></span>
+							<a target="_blank" class="link" href="<?php echo $FooterLink[0]['link_address']; ?>">
+								<?php echo HTMLDecode($FooterLink[0]['link_label']); ?>
+							</a>
+						</li>
+					</ul>
+				</li>
+			<?php } ?>
+			<?php if($FooterLink[1]['activity_status']){ ?>
+				<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+					<a class="link" target="_blank" href="<?php echo $FooterLink[1]['link_address']; ?>" >
+						<span id='FontIcon1' class="fa fa-<?php echo $FooterLink[1]['font_icon']; ?>"></span>
+						<?php echo HTMLDecode($FooterLink[1]['title']); ?>
+					</a>
+					<ul class="FooterItem">
+						<li>
+							<?php echo HTMLDecode($FooterLink[1]['description']); ?>
+						</li>
+						<li>
+							<span class="fa fa-angle-right"></span>
+							<a target="_blank" class="link" href="<?php echo $FooterLink[1]['link_address']; ?>">
+								<?php echo HTMLDecode($FooterLink[1]['link_label']); ?>
+							</a>
+						</li>
+					</ul>
+				</li>
+			<?php } ?>
+		</ul>
+	</div>
+
+<script type="text/javascript" src="../lib/js/font-awesome-list.js"></script>
+<script type="text/javascript">
+$("#FontIcon0").attr('class', 'fa '+(fontawesome[ "<?php echo $FooterLink[0]['font_icon']; ?>" ] == "custom" ? "icon-" : "fa-")+"<?php echo $FooterLink[0]['font_icon']; ?>" );
+$("#FontIcon1").attr('class', 'fa '+(fontawesome[ "<?php echo $FooterLink[1]['font_icon']; ?>" ] == "custom" ? "icon-" : "fa-")+"<?php echo $FooterLink[1]['font_icon']; ?>" );
+</script>
+
+</footer>
