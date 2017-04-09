@@ -4,15 +4,17 @@
     /* A-Checks if user is logged in
     B- Fetches websiteno & profile_pic_add*/
 
-    $query='SELECT `default_header_address` FROM website WHERE websiteno=\''.$websiteno.'\' ;';
+    $query='SELECT `default_header_address`,`logo` FROM website WHERE websiteno=\''.$websiteno.'\' ;';
     $result = $conn->query($query);
     $def_header="";
+    $LogoImage=true;
     if( $result->num_rows > 0){
         $row = $result->fetch_assoc();
         if($row['default_header_address'])
             $def_header="../app_data/img/defaultheader/".$row['default_header_address'];
         else
             $def_header="../app_data/img/defaultheader/default.jpg";
+        $LogoImage=$row['logo'];
     }else{
         $def_header="../app_data/img/defaultheader/default.jpg";
     }
@@ -109,23 +111,29 @@
                 <div class="side-body padding-top">
                     <div class="row">
                         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <div class="title">Default Header ( of Aspect Ratio 2:1 or 4:1 )</div>
-                                    </div>
-                                    <div class="pull-right card-action">
-                                        <div class="btn-group" role="group" aria-label="...">
-                                            <button title="Change Profile Pic" class="btn btn-warning" data-toggle="modal" data-target="#ModalUploadHeader">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </button>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                                <div class="card card-success">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <div class="title">Default Header ( of Aspect Ratio 2:1 or 4:1 )</div>
                                         </div>
+                                        <div class="pull-right card-action">
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <button title="Change Profile Pic" class="btn btn-warning" data-toggle="modal" data-target="#ModalUploadHeader">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="clear-both"></div>
                                     </div>
-                                    <div class="clear-both"></div>
+                                    <div class="card-body">
+                                        <img id='DefaultHeaderImage' class="img-responsive" src="<?php echo $def_header; ?>" />
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <img id='DefaultHeaderImage' class="img-responsive" src="<?php echo $def_header; ?>" />
-                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" style="margin-top: 20px;">
+                                <big>Show IASBS Logo</big>
+                                <input type="checkbox" class="LogoCheckbox" <?php if($LogoImage)echo "checked" ?> />
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
@@ -611,6 +619,57 @@
                         $(this).closest("tr").attr("data-check",'off');
                         $(this).closest("tr").find("span.icon").addClass("disabled");
                         $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+                    }
+                },onInit:function(){
+                    if($(this).is(":checked")){
+                        $(this).closest("tr").attr("data-check",'on');
+                        $(this).closest("tr").find("span.icon").removeClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").removeAttr("disabled");
+                    }else{
+                        $(this).closest("tr").attr("data-check",'off');
+                        $(this).closest("tr").find("span.icon").addClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+                    }
+                }
+            });
+            
+            $(".LogoCheckbox").bootstrapSwitch({
+                onSwitchChange: function(){
+                    if($(this).is(":checked")){
+                        $(this).closest("tr").attr("data-check",'on');
+                        $(this).closest("tr").find("span.icon").removeClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").removeAttr("disabled");
+
+                        $.ajax({
+                            url: "../webservices/savelogostatus.php",
+                            data: {"logo": 1 },
+                            method: "POST",
+                            success: function(data){
+                                if(data.toLowerCase()=='right'){
+                                    Success('Saved ! Showing Logo On Website...');
+                                }else{
+                                    Failure(data);
+                                }
+                            }
+                        });
+
+                    }else{
+                        $(this).closest("tr").attr("data-check",'off');
+                        $(this).closest("tr").find("span.icon").addClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+
+                        $.ajax({
+                            url: "../webservices/savelogostatus.php",
+                            data: {"logo": 0 },
+                            method: "POST",
+                            success: function(data){
+                                if(data.toLowerCase()=='right'){
+                                    Success('Saved ! NOT Showing Logo On Website...');
+                                }else{
+                                    Failure(data);
+                                }
+                            }
+                        });
                     }
                 },onInit:function(){
                     if($(this).is(":checked")){

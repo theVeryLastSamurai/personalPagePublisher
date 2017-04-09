@@ -5,7 +5,7 @@
     B- Fetches websiteno & profile_pic_add*/
     
     $homepage_header=NULL;
-    $query='SELECT `homepage_header_address`,`homepage_header_caption`,`homepage_header_caption_bool` FROM website WHERE websiteno=\''.$websiteno.'\' ;';
+    $query='SELECT `homepage_header_address`,`homepage_header_caption`,`homepage_header_caption_bool`,`homepage_header_status` FROM website WHERE websiteno=\''.$websiteno.'\' ;';
     $result = $conn->query($query);
     if( $result->num_rows > 0){
         $row = $result->fetch_assoc();
@@ -17,6 +17,7 @@
 
 	$homepage_header_caption=$row['homepage_header_caption'];
 	$homepage_header_caption_bool=$row['homepage_header_caption_bool'];
+    $HomePageHeaderImageStatus=$row['homepage_header_status'];
         
     }else{
         $homepage_header="../app_data/img/homepageheader/default.jpg";
@@ -103,6 +104,7 @@
                                             <div class="title">Homepage Header ( of Aspect Ratio 2:1 or 4:1 )</div>
                                         </div>
                                         <div class="pull-right card-action">
+                                            <input type="checkbox" id="HomePageHeaderImageCheckbox" <?php if($HomePageHeaderImageStatus) echo "checked"; ?> />
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <button title="Change Profile Pic" class="btn btn-warning" data-toggle="modal" data-target="#ModalUploadHeader">
                                                     <i class="glyphicon glyphicon-edit"></i>
@@ -465,6 +467,57 @@
                         $(this).closest("tr").attr("data-check",'off');
                         $(this).closest("tr").find("span.icon").addClass("disabled");
                         $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+                    }
+                },onInit:function(){
+                    if($(this).is(":checked")){
+                        $(this).closest("tr").attr("data-check",'on');
+                        $(this).closest("tr").find("span.icon").removeClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").removeAttr("disabled");
+                    }else{
+                        $(this).closest("tr").attr("data-check",'off');
+                        $(this).closest("tr").find("span.icon").addClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+                    }
+                }
+            });
+
+            $("#HomePageHeaderImageCheckbox").bootstrapSwitch({
+                onSwitchChange: function(){
+                    if($(this).is(":checked")){
+                        $(this).closest("tr").attr("data-check",'on');
+                        $(this).closest("tr").find("span.icon").removeClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").removeAttr("disabled");
+
+                        $.ajax({
+                            url: "../webservices/savehomepagestatus.php",
+                            data: {"status": 1},
+                            method: "POST",
+                            success: function(data){
+                                if(data.toLowerCase()=='right'){
+                                    Success("Status Saved [ ON ]!");
+                                }else{
+                                    Failure(data);
+                                }
+                            }
+                        });
+
+                    }else{
+                        $(this).closest("tr").attr("data-check",'off');
+                        $(this).closest("tr").find("span.icon").addClass("disabled");
+                        $(this).closest("tr").find("input[type=text]").prop("disabled",'true');
+                        
+                        $.ajax({
+                            url: "../webservices/savehomepagestatus.php",
+                            data: {"status": 0},
+                            method: "POST",
+                            success: function(data){
+                                if(data.toLowerCase()=='right'){
+                                    Success("Status Saved [ OFF ]!");
+                                }else{
+                                    Failure(data);
+                                }
+                            }
+                        });
                     }
                 },onInit:function(){
                     if($(this).is(":checked")){

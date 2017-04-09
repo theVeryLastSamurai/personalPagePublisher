@@ -79,6 +79,9 @@
 	$HomepageImage="homepage_".$HomepageImage;
 
 */
+
+	$flag=copy( "../app_data/img/iasbsLogo.png" , $dir."/iasbsLogo.png" ) && $flag;
+
 	if(!$flag){
 		echo "WRONG";
 		return;

@@ -16,7 +16,7 @@
 		<?php
 			$PAGE='index.php';
 
-			$query="SELECT `homepage_header_address`,`homepage_header_caption_bool`,`homepage_header_caption` FROM `website` WHERE websiteno = ".$websiteno." ;";
+			$query="SELECT `homepage_header_address`,`homepage_header_caption_bool`,`homepage_header_caption`,`homepage_header_status` FROM `website` WHERE websiteno = ".$websiteno." ;";
 			$result=$conn->query($query);
 			$row=$result->fetch_assoc();
 			$HomepageImage=$row['homepage_header_address'];
@@ -25,6 +25,8 @@
 
 			$HomepageHeaderCaption=$row['homepage_header_caption'];
 			$HomepageHeaderCaptionBool=$row['homepage_header_caption_bool'];
+
+			$HomePageHeaderStatus=$row['homepage_header_status'];
 
 
 			$query="SELECT `content` FROM `text` WHERE websiteno = ".$websiteno." AND page_id = 'homepage' AND text_id = 'page_content' ;";
@@ -65,15 +67,17 @@
 				<div class="col-lg-2 col-md-2" ></div><!--added later-->
 				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<?php if($HomepageHeaderCaptionBool){ ?>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<?php if($HomePageHeaderStatus){ ?>
+						<?php if($HomepageHeaderCaptionBool){ ?>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<img class="HomepageHeaderImage img-responsive" src="<?php echo $HomepageImage; ?>" />
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<?php echo HTMLDecode($HomepageHeaderCaption); ?>
+							</div>
+						<?php }else{ ?>
 						<img class="HomepageHeaderImage img-responsive" src="<?php echo $HomepageImage; ?>" />
-						</div>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<?php echo HTMLDecode($HomepageHeaderCaption); ?>
-						</div>
-					<?php }else{ ?>
-					<img class="HomepageHeaderImage img-responsive" src="<?php echo $HomepageImage; ?>" />
+						<?php } ?>
 					<?php } ?>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:30px;">

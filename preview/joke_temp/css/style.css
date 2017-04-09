@@ -2,7 +2,7 @@
 /* navbar */
 .navbar-default {
     background-color: #000000;
-	border-color: #b5cf1f;
+	border-color: #23cf1d;
 	border-width: 0;
 	border-radius: 0;
 	border-bottom-width: 5px;
@@ -22,19 +22,19 @@
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #b5cf1f;
+    color: #23cf1d;
 }
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
     color: #000000;
-    background-color: #b5cf1f;
+    background-color: #23cf1d;
 }
 .navbar-default .navbar-nav > .open > a, 
 .navbar-default .navbar-nav > .open > a:hover, 
 .navbar-default .navbar-nav > .open > a:focus {
     color: #000000;
-    background-color: #b5cf1f;
+    background-color: #23cf1d;
 }
 /* caret */
 .navbar-default .navbar-nav > .dropdown > a .caret {
@@ -44,16 +44,16 @@
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover{
 	color: #000000;
-	background-color: #b5cf1f;
+	background-color: #23cf1d;
 }
 
 .navbar-default .navbar-nav > .dropdown ul.dropdown-menu li.active a{
-	background-color: #b5cf1f !important;
+	background-color: #23cf1d !important;
 }
 
 .SearchBox{
 	background-color: #000000;
-	color: #b5cf1f;
+	color: #23cf1d;
 	padding-left:15px;
 	padding-right:15px;
 	margin-top:10px;
@@ -79,7 +79,7 @@
 .SearchBox button{
 	height:2em;
 	background-color: #000000;;
-	color: #b5cf1f;
+	color: #23cf1d;
 	border:0;
 }
 
@@ -130,7 +130,7 @@ footer ul.FooterSections > li:before{
 	width: 5px;
 	height: 1em;
 	margin-right:5px;
-	background-color: #b5cf1f;
+	background-color: #23cf1d;
 }
 
 footer ul.FooterSections > li ul.FooterItem{
@@ -153,7 +153,7 @@ a.social{
 
 .social:focus,
 .social:hover{
-	color: #b5cf1f;
+	color: #23cf1d;
 	cursor:pointer;
 }
 
@@ -164,13 +164,13 @@ a.link{
 
 a.link:focus,
 a.link:hover{
-	color: #b5cf1f;
+	color: #23cf1d;
 	cursor:pointer;
 }
 
 .HomepageHeaderImage{
 	border-style:solid;
-	border-width: 0px;
+	border-width: 10px;
 	border-color: #000000;
 	margin-bottom:20px;
 }
@@ -184,7 +184,7 @@ a.link:hover{
     display: none;
     text-align: center;
     padding-top:5px;
-    background-color: #b5cf1f;
+    background-color: #23cf1d;
     color: #000000;
 }
 
@@ -195,7 +195,7 @@ a.link:hover{
 	height: 1em;
 	margin-right:20px;
 	margin-bottom:-5px;
-	background-color: #b5cf1f;
+	background-color: #23cf1d;
 }
 
 .card{
@@ -208,7 +208,7 @@ a.link:hover{
 
 .FormButton:focus,
 .FormButton:hover{
-	background-color: #b5cf1f;
+	background-color: #23cf1d;
 }
 
 
@@ -218,7 +218,7 @@ ul.PubSubCateg{
 }
 
 .LiCaret{
-	color: #b5cf1f;
+	color: #23cf1d;
 	margin-right: 10px;
 }
 

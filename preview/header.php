@@ -25,12 +25,15 @@
 	$EventsList=array('groupmeetings', 'participatedactivities' ,'beyondscience');
 
 
-	$query="SELECT `default_header_address` FROM `website` WHERE websiteno = ".$websiteno." ;";
+	$query="SELECT `default_header_address`,`logo` FROM `website` WHERE websiteno = ".$websiteno." ;";
 	$result=$conn->query($query);
 	$row=$result->fetch_assoc();
 	$HeaderImage=$row['default_header_address'];
 	
 	$HeaderImage=$_SESSION['LoggedIn']."_images/header_".$HeaderImage;
+
+	$LogoImage=$row['logo'];
+	$LogoImage= $LogoImage? $_SESSION['LoggedIn']."_images/iasbsLogo.png" : false ;
 
 
 	$query="SELECT `content` FROM `text` WHERE websiteno = ".$websiteno." AND text_id = 'fullname' ; ";
@@ -52,8 +55,13 @@
 		<div class="container">
 			<div class="navbar-header">
 				<div class="SearchBox hidden-lg hidden-md hidden-sm" style="float:left;width: 80%;" >
-					<input type="text" placeholder="Search" style="width:80%;" />
+					<?php
+						if($LogoImage)
+							echo "<a style='float:left;' href='https://iasbs.ac.ir/' target='_blank' ><img class='hidden-lg hidden-md hidden-sm' src='$LogoImage' style='height: 30px;' /></a><div style='margin-left: 50px;margin-right: 50px;'>";
+					?>
+					<input type="text" placeholder="Search" style="width:auto;" />
 					<button><i class="fa fa-search"></i></button>
+					<?php if($LogoImage) echo "</div>"; ?>
 				</div>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
@@ -64,6 +72,7 @@
 		    <div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<?php
+						if($LogoImage) echo "<li class='hidden-xs' ><a href='https://iasbs.ac.ir' target='_blank' ><img src='$LogoImage' style='height:20px;' /></a></li> ";
 						foreach($List as $item){
 							if($page[$item]['activity_status']==1){
 								$class="";
