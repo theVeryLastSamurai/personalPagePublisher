@@ -3,13 +3,13 @@
 	include("../../webservices/database_header.php");
 
 	if(!isset($_REQUEST['username']) || !isset($_REQUEST['password']) || !isset($_REQUEST['email'])){
-		echo "wrong";
+		echo "wrong-parameters not recieved";
 		return;
 	}
 
 	$query="INSERT INTO `website` (`websiteno`, `username`, `default_header_address`, `homepage_header_address`) VALUES (NULL, '".$_REQUEST['username']."', '', '');";
 	if(!$conn->query($query)){
-		echo "wrong";
+		echo "wrong-database query not submitted";
 		return;
 	}
 	$websiteno=$conn->insert_id;
@@ -105,12 +105,12 @@
 
 	foreach ($query as $q ) {
 		if(!$conn->query($q)){
-
+			echo $q;
 			foreach( $DeleteQuery as $q){
 				$conn->query($q);
 			}
-
-			echo "wrong";
+			echo "<br/>===============<br/>";
+			echo "<br/>wrong-weird error<br/>";
 			return;
 		}
 	}

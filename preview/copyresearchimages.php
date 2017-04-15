@@ -18,7 +18,7 @@
 	for( $i=0 ; $i<$result->num_rows ; $i++){
 		$row=$result->fetch_assoc();
 		$pic=$row['pic_address'];
-		$pic_bool=$row['pic_cool'];
+		$pic_bool=$row['pic_bool'];
 
 		while(!$pic){
 			$query="UPDATE `research_topic` SET `pic_address` = 'default.jpg', `pic_bool`=0 WHERE `research_topic`.`topicno` = ".$row['topicno']." ;";

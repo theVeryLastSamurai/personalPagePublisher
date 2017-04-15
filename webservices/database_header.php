@@ -1,7 +1,7 @@
 <?php
 	$servername = "localhost";
-	$username = "pppUser";
-	$password = "pppPass";
+	$username = "root";
+	$password = "";
 	$dbname = "ppp_db";
 
 	// Create connection

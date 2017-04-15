@@ -20,11 +20,12 @@
 
 // Load the public key from the public.pem file
 $publicKey = file_get_contents('public.pem');
+
 // Extract public key
 $res= openssl_get_publickey($publicKey);
 
 // Read the previously encrypted string and the key used to encrypt it
- $encryptedData = base64_decode($_POST["user"]);
+$encryptedData = base64_decode($_POST["user"]);
 
 // Decrypt the data with our $publickey and store the result in $decryptedData
 $result = openssl_public_decrypt($encryptedData, $decryptedData, $res);
@@ -47,21 +48,26 @@ if ($result) {
 								'email':'$decryptedData@iasbs.ac.ir'
 							},
 							success: function(d){
-								$.ajax({
-									url: '../webservices/login.php',
-									data: {
-										'username': '$decryptedData',
-										'password':'$decryptedData'
-									},
-									success:function(d){
-										if(d.toLowerCase()=='right'){
-											window.location.href = '../index.html';
+								if(d.toLowerCase()=='right'){
+									$.ajax({
+										url: '../webservices/login.php',
+										data: {
+											'username': '$decryptedData',
+											'password':'$decryptedData'
+										},
+										success:function(d){
+											console.log(d);
+											if(d.toLowerCase()=='right'){
+												window.location.href = '../index.html';
+											}
+										},
+										failure: function(){
 										}
-									}
-								});
-
+									});
+								}else{
+								}
 							},
-							failure: function(){//couldn't sign up new user
+							failure: function(){//couldn't sign up new use
 							}
 						});
 					}else{//user already exists, LOG USER IN
